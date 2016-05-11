@@ -7,10 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
+ * The name of the scope can be anything
  * Created by Aditya on 11-May-16.
  */
 @Documented
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CustomeScope {
+public @interface CustomScope {
 }

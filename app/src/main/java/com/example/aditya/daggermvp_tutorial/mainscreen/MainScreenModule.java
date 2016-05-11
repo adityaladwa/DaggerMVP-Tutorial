@@ -2,7 +2,7 @@ package com.example.aditya.daggermvp_tutorial.mainscreen;
 
 
 
-import com.example.aditya.daggermvp_tutorial.util.CustomeScope;
+import com.example.aditya.daggermvp_tutorial.util.CustomScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,7 +20,7 @@ public class MainScreenModule {
     }
 
     @Provides
-    @CustomeScope
+    @CustomScope
     MainScreenContract.View providesMainScreenContractView() {
         return mView;
     }
