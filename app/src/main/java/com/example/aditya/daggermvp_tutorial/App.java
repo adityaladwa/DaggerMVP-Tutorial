@@ -2,10 +2,11 @@ package com.example.aditya.daggermvp_tutorial;
 
 import android.app.Application;
 
-import com.example.aditya.daggermvp.data.component.DaggerNetComponent;
-import com.example.aditya.daggermvp.data.component.NetComponent;
-import com.example.aditya.daggermvp.data.module.AppModule;
-import com.example.aditya.daggermvp.data.module.NetModule;
+import com.example.aditya.daggermvp_tutorial.data.component.DaggerNetComponent;
+import com.example.aditya.daggermvp_tutorial.data.component.NetComponent;
+import com.example.aditya.daggermvp_tutorial.data.module.AppModule;
+import com.example.aditya.daggermvp_tutorial.data.module.NetModule;
+
 
 /**
  * Created by Aditya on 11-May-16.
