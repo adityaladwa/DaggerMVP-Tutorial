@@ -1,7 +1,9 @@
 package com.example.aditya.daggermvp_tutorial.mainscreen;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.core.deps.guava.annotations.VisibleForTesting;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 import com.example.aditya.daggermvp_tutorial.App;
 import com.example.aditya.daggermvp_tutorial.R;
 import com.example.aditya.daggermvp_tutorial.data.Post;
+import com.example.aditya.daggermvp_tutorial.util.EspressoIdlingResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
                 .mainScreenModule(new MainScreenModule(this))
                 .build().inject(this);
 
+
+        //Increment the counter before making a network request
+        EspressoIdlingResource.increment();
+
         //Call the method in MainPresenter to make Network Request
         mainPresenter.loadPost();
     }
@@ -48,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         //Create the array adapter and set it to list view
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
+        //Decrement after loading the posts
+        EspressoIdlingResource.decrement();
     }
 
     @Override
@@ -55,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         //Show error message Toast
         Toast.makeText(getApplicationContext(), "Error" + message, Toast.LENGTH_SHORT).show();
 
+        // If there is no network connection we get an error and decrement the counter because the call has finished
+        EspressoIdlingResource.decrement();
     }
 
     @Override
@@ -62,5 +73,10 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         //Show completed message Toast
         Toast.makeText(getApplicationContext(), "Complete", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 }

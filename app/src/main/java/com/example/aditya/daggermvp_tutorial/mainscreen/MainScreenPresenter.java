@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
  */
 public class MainScreenPresenter implements MainScreenContract.Presenter {
 
-    Retrofit retrofit;
+    public Retrofit retrofit;
     MainScreenContract.View mView;
 
     @Inject
@@ -51,7 +51,7 @@ public class MainScreenPresenter implements MainScreenContract.Presenter {
                 });
     }
 
-    private interface PostService {
+    public interface PostService {
         @GET("/posts")
         Observable<List<Post>> getPostList();
     }
